@@ -1,0 +1,79 @@
+﻿@model IEnumerable<DenunciasMunicipalesBackend.Models.Complaint>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ComplaintType.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CaseAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Longitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Latitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Image)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ComplaintType.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CaseAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Longitude)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Latitude)
+            </td>
+            <td>
+                @if (!string.IsNullOrEmpty(item.Image))
+                {
+                    <img src="@Url.Content(item.Image)" alt="Image" style="width:100px;height:150px;max-width: 100%; height: auto;" />
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ComplaintId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ComplaintId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ComplaintId })
+            </td>
+        </tr>
+    }
+
+</table>
