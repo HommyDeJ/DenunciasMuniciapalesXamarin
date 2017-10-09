@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DenunciasMunicipalesApp.Pages.LoginPage"
+             Title="Inicio de sesión"
+             BackgroundColor="Silver"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}">
+
+    <ContentPage.Content>
+
+        <ScrollView>
+
+            <StackLayout Spacing="10" 
+                         Padding="30"
+                         BindingContext="{Binding LoginUser}">
+
+                <Image Source="asde.png"/>
+
+                <Label  Text="Denuncias ASDE"
+                        TextColor="White"
+                        Font="29"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="Center"/>
+
+                <Entry  x:Name="Email"
+                        Text="{Binding Email, Mode=TwoWay}"
+                        Placeholder="Correo electrónico"
+                        TextColor="Gray"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        WidthRequest="500"/>
+
+                <Entry  x:Name="Password"
+                        Text="{Binding Password, Mode=TwoWay}"
+                        IsPassword="true" 
+                        Placeholder="Contraseña"
+                        TextColor="Gray"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        WidthRequest="500"/>
+
+                <Button x:Name="accederButton"
+                        Command="{Binding LoginCommand}"
+                        IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                        Text="Acceder"
+                        TextColor="White"
+                        BackgroundColor="Navy"
+                        HeightRequest="60"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        WidthRequest="500"/>
+
+                <Button Text="Acceder con Facebook" 
+                        TextColor="White"
+                        BackgroundColor="Blue"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        WidthRequest="500"
+                        HeightRequest="60"
+                        Clicked="LoginWithFacebook_Clicked"/>
+
+                <Button x:Name="crearUsuario"
+                        IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                        Command="{Binding AddUserCommand}"
+                        Text="Nuevo Usuario" 
+                        TextColor="White"
+                        BackgroundColor="Green"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        WidthRequest="500"
+                        HeightRequest="60"/>
+
+                <ActivityIndicator HorizontalOptions="EndAndExpand"
+                                   IsRunning="{Binding IsRunning, Mode=TwoWay}">
+                </ActivityIndicator>
+
+            </StackLayout>
+
+        </ScrollView>
+
+    </ContentPage.Content>
+
+</ContentPage>

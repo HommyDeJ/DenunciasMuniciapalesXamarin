@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:DenunciasMunicipalesApp.Controls"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             x:Class="DenunciasMunicipalesApp.Pages.NewComplaintPage"
+             Title="Nueva denuncia"
+             BackgroundColor="Silver"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}">
+    <ScrollView>
+        <StackLayout Padding="30"
+                     Spacing="10"
+                     BindingContext="{Binding NewComplaint}">
+
+            <control:BindablePicker
+    Title="Tipo de denuncia"
+    DisplayMemberPath="Description"
+    SelectedValuePath="ComplaintTypeId"
+    ItemsSource="{Binding ComplaintTypes}"
+    SelectedValue="{Binding Path=ComplaintTypeId, Mode=TwoWay}}"
+    HorizontalOptions="FillAndExpand"
+    VerticalOptions="Center">
+            </control:BindablePicker>
+
+            <Entry BackgroundColor="White" 
+            Text="{Binding CaseAddress, Mode=TwoWay}"
+                   Placeholder="Dirección del Caso"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   WidthRequest="500"
+                   HeightRequest="70"/>
+
+            <Entry BackgroundColor="White" 
+                   Text="{Binding Description, Mode=TwoWay}"
+                   Placeholder="Descripción del Caso"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   WidthRequest="500"
+                   HeightRequest="70"/>
+
+            <StackLayout Orientation="Horizontal"
+                         Padding="10"
+                         Spacing="30">
+
+                <Image HorizontalOptions="Start"
+                       Source="camera.png"
+                       HeightRequest="50"
+                       WidthRequest="50">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding TakePictureCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Image VerticalOptions="Center"
+                       HorizontalOptions="FillAndExpand"
+                       Source="video.png"
+                       HeightRequest="50"
+                       WidthRequest="50">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding TakeVideoCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Image HorizontalOptions="End"
+                       Source="microfono.png"
+                       HeightRequest="50"
+                       WidthRequest="50"/>
+
+                <Button x:Name="pickVideo"
+                        HorizontalOptions="Start"
+                        Image="clip.png"
+                        BorderColor="Transparent"
+                        BackgroundColor="Transparent"
+                        HeightRequest="50"
+                        WidthRequest="50"/>
+
+                <ActivityIndicator HorizontalOptions="EndAndExpand"
+                                   IsRunning="{Binding IsRunning, Mode=TwoWay}">
+                </ActivityIndicator>
+            </StackLayout>
+
+            <Image Source="{Binding ImageSource, Mode=TwoWay}"/>
+
+            <maps:Map 
+                
+    WidthRequest="320" 
+    HeightRequest="300"
+    x:Name="MyMap"
+    IsShowingUser="true"
+    MapType="Hybrid">
+
+
+
+            </maps:Map>
+
+            <Button Command="{Binding NewComplaintCommand}"
+                    IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                    BorderRadius="20"
+                    HeightRequest="60"
+                    BackgroundColor="Navy"
+                    TextColor="White"
+                    Text="Enviar Denuncia"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    WidthRequest="500"/>
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
